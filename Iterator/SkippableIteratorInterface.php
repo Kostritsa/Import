@@ -2,10 +2,10 @@
 
 namespace Likers\Import\Iterator;
 
-interface ExtendedIteratorInterface extends \Iterator
+interface SkippableIteratorInterface extends \Iterator
 {
     /**
-     * @param  int $skipTo
+     * @param int $skipTo
      * @return bool
      */
     public function skipTo( $skipTo );
