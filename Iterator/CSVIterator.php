@@ -20,7 +20,8 @@ class CSVIterator implements SkippableIteratorInterface
         $this->_defaultLocale = setlocale( LC_ALL, 0 );
 
         $this->_importLocale();
-        $this->_filePointer = fopen( $file, 'r' );
+        //TODO: need to handle file missing situation
+        $this->_filePointer = fopen( $file, 'r' ); 
         $this->_defaultLocale();
     }
 

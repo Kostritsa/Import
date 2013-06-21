@@ -27,16 +27,17 @@ class BitrixIblockImportDriver extends ImportDriverAbstract
     /**
      * Get existing elements to make decisions for elements
      * @return bool
+     *
      */
     public function prepare()
     {
-        $uniqueField = current( $this->_mapper->uniqueCol );
+        $uniqueField = $this->_mapper->getUnique();
 
         $result = \CIBlockElement::GetList(
             array(),
             array( 'IBLOCK_ID' => $this->_iblockId ),
             false, false,
-            array( 'ID', 'XML_ID', 'ACTIVE' )
+            array( 'ID', 'XML_ID', 'ACTIVE' ) //TODO: сформировать $arSelect из обновляемых полей и уникального
         );
 
         while( $element = $result->fetch() ){
@@ -52,15 +53,15 @@ class BitrixIblockImportDriver extends ImportDriverAbstract
      */
     public function decide( $row )
     {
-        $uniqueCol = current( array_keys( $this->_mapper->uniqueCol ) );
+        $uniqueCol = $this->_mapper->_uniqueIterCol;
 
         if( is_array( $this->_existingEls[ $row[ $uniqueCol ] ] ) ){
-            $this->_create( $row );
-            return '_create';
-        }
-        else{
             $this->_update( $row[ $uniqueCol ], $row );
             return '_update';
+        }
+        else{
+            $this->_create( $row );
+            return '_create';
         }
     }
 

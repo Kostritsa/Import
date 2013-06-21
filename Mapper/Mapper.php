@@ -6,18 +6,21 @@ class Mapper
 {
     protected $_map;
     protected $_updateMap;
-    protected $_uniqueCol;
+    protected $_uniqueItrCol;
+    protected $_uniqueDrvField;
 
     /**
      * @param array $map Keys in array represents iteraror's cols, values — driver fields. Values can be an array
-     * @param array $uniqueCol Must have key and value from $map. Value can't be an array
+     * @param int $uniqueItrCol unique col from iterator
+     * @param text $uniqueDrvField [description] unique field from driver
      * @param array $updataMap Values from $map to be updated
      */
-    function __construct( $map, $uniqueCol, $updateMap = array() )
+    function __construct( $map, $uniqueItrCol, $uniqueDrvField, $updateMap = array() )
     {
         $this->_map = $map;
         $this->_updateMap = $updateMap ? $updateMap : $map;
-        $this->_uniqueCol = $uniqueCol;
+        $this->_uniqueItrCol = $uniqueItrCol;
+        $this->_uniqueDrvField = $uniqueDrvField;
     }
 
     /**
@@ -35,6 +38,10 @@ class Mapper
         return $ret;
     }
 
+    public function getUnique()
+    {
+        return $this->_uniqueDrvField;
+    }
 
     public function map4Add( $row )
     {

@@ -29,7 +29,8 @@ $mapper = new Mapper\Mapper(
         4 => 'PROPERTY_QUANTITY',
         5 => 'PROPERTY_PRICE'
     ),
-    array( 0 => 'XML_ID' ), // Unique field
+    0,        // Unique col
+    'XML_ID', // Unique field
     array( 4 => 'PROPERTY_QUANTITY', 5 => 'PROPERTY_PRICE', ) // Update fields
 );
 
